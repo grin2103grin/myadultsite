@@ -6,54 +6,52 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
     * { box-sizing: border-box; }
+    html, body { height: 100%; }
     body {
+      margin: 0; padding: 0;
+      background: #111; color: #eee;
       font-family: Arial, Helvetica, sans-serif;
-      background: #111;
-      color: #eee;
       text-align: center;
-      margin: 0;
-      padding: 0;
     }
+
+    /* 重なりをなくすため header は static に */
     header {
+      position: static;   /* ← sticky をやめる */
       background: #222;
       padding: 20px;
-      position: sticky;
-      top: 0;
-      z-index: 5;
     }
-    header h1 {
-      margin: 0;
-      font-size: 28px;
-      color: #ff4081;
-    }
+    header h1 { margin: 0; font-size: 28px; color: #ff4081; }
+
     main {
-      padding: 40px 20px;
-      position: relative;
+      position: relative;   /* ボタンを確実に前面へ */
       z-index: 1;
+      padding: 40px 20px 60px;
     }
-    .button {
+
+    /* クリックを確実に通す設定 */
+    a.button {
       display: inline-block;
       margin: 15px;
       padding: 15px 25px;
       font-size: 18px;
+      text-decoration: none;
       color: #fff;
       background: #ff4081;
-      text-decoration: none;
       border-radius: 8px;
-      cursor: pointer;          /* クリックカーソル */
-      pointer-events: auto;     /* クリック有効 */
+      cursor: pointer;
+      pointer-events: auto;     /* 念のため明示 */
       position: relative;
-      z-index: 2;               /* 何か被っても上に */
+      z-index: 10;              /* 前面に固定 */
+      user-select: none;
     }
-    .button:hover { background: #ff77a9; }
+    a.button:hover { background: #ff77a9; }
+    a.button:active { transform: translateY(1px); }
+
     footer {
       background: #222;
       padding: 15px;
       font-size: 12px;
       color: #aaa;
-      margin-top: 40px;
-      position: relative;
-      z-index: 0;
     }
   </style>
 </head>
@@ -66,7 +64,7 @@
     <p>Welcome to my site!<br>
       Here you can find my original videos and recommended affiliate content.</p>
 
-    <!-- ▼ ここをあなたのURLに差し替え ▼ -->
+    <!-- ▼ あなたのURLに差し替えてOK ▼ -->
     <a href="https://example.com/mysale"
        class="button" target="_blank" rel="noopener noreferrer">自作動画を見る</a>
 
