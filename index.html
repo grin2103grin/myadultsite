@@ -14,21 +14,19 @@
       text-align: center;
     }
 
-    /* 重なりをなくすため header は static に */
     header {
-      position: static;   /* ← sticky をやめる */
+      position: static;
       background: #222;
       padding: 20px;
     }
     header h1 { margin: 0; font-size: 28px; color: #ff4081; }
 
     main {
-      position: relative;   /* ボタンを確実に前面へ */
+      position: relative;
       z-index: 1;
       padding: 40px 20px 60px;
     }
 
-    /* クリックを確実に通す設定 */
     a.button {
       display: inline-block;
       margin: 15px;
@@ -39,9 +37,9 @@
       background: #ff4081;
       border-radius: 8px;
       cursor: pointer;
-      pointer-events: auto;     /* 念のため明示 */
+      pointer-events: auto;
       position: relative;
-      z-index: 10;              /* 前面に固定 */
+      z-index: 10;
       user-select: none;
     }
     a.button:hover { background: #ff77a9; }
@@ -64,14 +62,13 @@
     <p>Welcome to my site!<br>
       Here you can find my original videos and recommended affiliate content.</p>
 
-<!-- 自作動画ボタン：あなたの販売ページURL -->
-<a href="https://YOUR-SELF-SALES-URL"
-   class="button" target="_blank" rel="noopener noreferrer">自作動画を見る</a>
+    <!-- 自作動画ボタン -->
+    <a href="https://example.com/mysale"
+       class="button" target="_blank" rel="noopener noreferrer">自作動画を見る</a>
 
-<!-- アフィリエイト動画ボタン：あなたのアフィリリンク -->
-<a href="https://YOUR-AFFILIATE-URL"
-   class="button" target="_blank" rel="noopener noreferrer">おすすめ動画を見る</a>
-
+    <!-- オススメ動画ボタン -->
+    <a href="https://example.com/affiliate"
+       class="button" target="_blank" rel="noopener noreferrer">おすすめ動画を見る</a>
   </main>
 
   <footer>
