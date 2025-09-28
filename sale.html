@@ -1,118 +1,94 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8">
   <title>自作作品一覧 | My Adult Site</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
-    :root{
-      --bg:#111; --panel:#1b1b1b; --ink:#eee;
-      --muted:#aaa; --accent:#ff4081; --accent-2:#ff77a9;
+    body {
+      margin:0;
+      font-family: Arial, sans-serif;
+      background:#111;
+      color:#eee;
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0; font-family:Arial,Helvetica,sans-serif;
-      background:var(--bg); color:var(--ink);
+    header, footer {
+      background:#222;
+      text-align:center;
+      padding:15px;
     }
-    header,footer{
-      background:#222; padding:16px 20px; text-align:center;
+    header h1 { color:#ff4081; margin:0; }
+    .wrap { max-width:900px; margin:20px auto; padding:10px; }
+    .grid {
+      display:grid;
+      gap:20px;
+      grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
     }
-    header a.back{
-      position:absolute; left:16px; top:14px; color:var(--muted); text-decoration:none;
-      border:1px solid #333; padding:6px 10px; border-radius:8px;
+    .card {
+      background:#1e1e1e;
+      border:1px solid #333;
+      border-radius:10px;
+      overflow:hidden;
     }
-    header h1{margin:0; color:var(--accent); font-size:22px}
-    .wrap{max-width:1040px; margin:0 auto; padding:20px}
-    .grid{
-      display:grid; gap:16px;
-      grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+    .thumb {
+      aspect-ratio:16/9;
+      background:#000 center/cover no-repeat;
     }
-    .card{
-      background:var(--panel); border:1px solid #2a2a2a; border-radius:14px;
-      overflow:hidden; display:flex; flex-direction:column;
-      transition:transform .12s ease, box-shadow .12s ease;
+    .body { padding:15px; }
+    .title { font-size:16px; margin-bottom:8px; }
+    .price { color:#ff77a9; font-weight:bold; margin-bottom:10px; }
+    .btn {
+      display:inline-block;
+      padding:10px 15px;
+      background:#ff4081;
+      color:#fff;
+      text-decoration:none;
+      border-radius:8px;
     }
-    .card:hover{ transform:translateY(-2px); box-shadow:0 6px 18px rgba(0,0,0,.25); }
-    .thumb{
-      aspect-ratio:16/9; background:#000 center/cover no-repeat;
-      border-bottom:1px solid #2a2a2a;
-    }
-    .body{ padding:12px 14px; display:flex; flex-direction:column; gap:8px; }
-    .title{ font-size:15px; line-height:1.5; }
-    .meta{ color:var(--muted); font-size:12px; }
-    .price{ font-weight:bold; }
-    .btn{
-      margin-top:8px; display:inline-block; text-align:center;
-      background:var(--accent); color:#fff; text-decoration:none;
-      padding:10px 14px; border-radius:10px; font-weight:bold;
-    }
-    .btn:hover{ background:var(--accent-2); }
-    .row{ display:flex; align-items:center; justify-content:space-between; gap:8px; }
-    .note{ color:var(--muted); font-size:12px; text-align:center; margin-top:14px; }
-    footer p{margin:0; color:#aaa; font-size:12px}
-    @media (max-width:560px){
-      header h1{ font-size:18px }
-      header a.back{ position:static; display:inline-block; margin-bottom:8px }
-    }
+    .btn:hover { background:#ff77a9; }
   </style>
 </head>
 <body>
   <header>
-    <a class="back" href="./">← トップへ</a>
     <h1>自作作品一覧</h1>
   </header>
 
   <div class="wrap">
-    <p class="note">※価格や在庫は販売ページでご確認ください。</p>
+    <div class="grid">
 
-    <section class="grid">
-
-      <!-- ▼ 作品カード（必要な数だけコピペして使う） ▼ -->
-      <article class="card">
-        <!-- サムネ画像：URLを差し替え（例はダミー） -->
+      <!-- ▼作品1カード -->
+      <div class="card">
         <div class="thumb" style="background-image:url('https://picsum.photos/seed/vid001/800/450');"></div>
         <div class="body">
-          <div class="title">【制服コス×ハンド】夜のお仕事美女 001（7分）</div>
-          <div class="row">
-            <div class="meta">解像度: 1080p / 音声あり</div>
-            <div class="price">¥980</div>
-          </div>
-          <!-- 購入ボタン：各作品の販売URLに差し替え -->
-          <a class="btn" target="_blank" rel="noopener noreferrer"
-             href="https://www.pcolle.com/manage/detail/?manage_id=1822168bda36ea913d">購入ページへ</a>
+          <div class="title">制服コス×ハンドサービス 001（7分）</div>
+          <div class="price">¥980</div>
+          <a href="https://www.pcolle.com/manage/detail/?manage_id=1822168bda36ea913d"
+             target="_blank" rel="noopener noreferrer" class="btn">購入ページへ</a>
         </div>
-      </article>
+      </div>
 
-      <article class="card">
+      <!-- ▼作品2カード -->
+      <div class="card">
         <div class="thumb" style="background-image:url('https://picsum.photos/seed/vid002/800/450');"></div>
         <div class="body">
-          <div class="title">【非常階段フェチ】制服の背徳 002（5分）</div>
-          <div class="row">
-            <div class="meta">解像度: 1080p / 音声あり</div>
-            <div class="price">¥780</div>
-          </div>
-          <a class="btn" target="_blank" rel="noopener noreferrer"
-             href="https://www.pcolle.com/manage/detail/?manage_id=1822168bda36ea913d">購入ページへ</a>
+          <div class="title">非常階段フェチ 002（5分）</div>
+          <div class="price">¥780</div>
+          <a href="https://www.pcolle.com/manage/detail/?manage_id=1822168bda36ea913d"
+             target="_blank" rel="noopener noreferrer" class="btn">購入ページへ</a>
         </div>
-      </article>
+      </div>
 
-      <article class="card">
+      <!-- ▼作品3カード -->
+      <div class="card">
         <div class="thumb" style="background-image:url('https://picsum.photos/seed/vid003/800/450');"></div>
         <div class="body">
-          <div class="title">【室内濃厚】制服コスの彼女 003（9分）</div>
-          <div class="row">
-            <div class="meta">解像度: 4K / 音声あり</div>
-            <div class="price">¥1,280</div>
-          </div>
-          <a class="btn" target="_blank" rel="noopener noreferrer"
-             href="https://www.pcolle.com/manage/detail/?manage_id=1822168bda36ea913d">購入ページへ</a>
+          <div class="title">室内濃厚コスプレ 003（9分）</div>
+          <div class="price">¥1,280</div>
+          <a href="https://www.pcolle.com/manage/detail/?manage_id=1822168bda36ea913d"
+             target="_blank" rel="noopener noreferrer" class="btn">購入ページへ</a>
         </div>
-      </article>
-      <!-- ▲ カードここまで。複製して増やす ▲ -->
+      </div>
 
-    </section>
-
-    <p class="note">他の作品も随時追加予定です。</p>
+    </div>
   </div>
 
   <footer>
