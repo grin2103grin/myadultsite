@@ -121,13 +121,13 @@ footer{
 <footer>© 2025 My Adult Site</footer>
 
 <script>
-/* ---- 1. 商品データ定義 ---- */
+/* ---- 1. 商品データ定義（tags: [] で複数タグOK） ---- */
 const items = [
   // 自作（Pcolle直リンク）
   {
     title: "【美女/オナサポ 001】夜のお仕事美女の制服コス×ハンドサービス",
     img: "https://img.pcolle.com/1822168bda36ea913d/26472268ceab6f89c1e/222607_S__86089731.jpg",
-    tag: "制服","手こき",
+    tags: ["制服","手こき"],
     price: "¥1,000",
     url: "https://www.pcolle.com/product/detail/?product_id=26472268ceab6f89c1e",
     kind: "self"
@@ -135,7 +135,7 @@ const items = [
   {
     title: "【美女/着替え 001】美脚＆ヒップラインが際立つ着替えシーン",
     img: "https://img.pcolle.com/1822168bda36ea913d/26442268c79dcd30b4b/140205_ohurokigae001.png",
-    tag: "着替え","盗撮",
+    tags: ["着替え","盗撮"],
     price: "¥1,000",
     url: "https://www.pcolle.com/product/detail/?product_id=26442268c79dcd30b4b",
     kind: "self"
@@ -143,7 +143,7 @@ const items = [
   {
     title: "【美女/着替え 002】私服スク水学生服…トイレでの二段階着替え盗撮風映像",
     img: "https://img.pcolle.com/1822168bda36ea913d/26490368d32ee349abf/083603_kigae002.mp4_000009766.png",
-    tag: "室内","制服","盗撮","スク水",
+    tags: ["室内","制服","盗撮","スク水"],
     price: "¥1,000",
     url: "https://www.pcolle.com/product/detail/?product_id=26490368d32ee349abf",
     kind: "self"
@@ -151,7 +151,7 @@ const items = [
   {
     title: "【美女/オナサポ 002】私服美女のベッド上ローション×ハンドサービス",
     img: "https://img.pcolle.com/1822168bda36ea913d/26490568d336293b9b8/040545_tekoki001.mp4_000004633.png",
-    tag: "手こき","私服",
+    tags: ["手こき","私服"],
     price: "¥1,000",
     url: "https://www.pcolle.com/product/detail/?product_id=26490568d336293b9b8",
     kind: "self"
@@ -159,7 +159,7 @@ const items = [
   {
     title: "【美女/グラビア】美脚＆美尻 美女のグラビア撮影(スク水/制服) 001",
     img: "https://img.pcolle.com/1822168bda36ea913d/26532368dd88b47031c/050156_gurabia001.mp4_000090300.png",
-    tag: "グラビア","制服","スク水",
+    tags: ["グラビア","制服","スク水"],
     price: "¥800",
     url: "https://www.pcolle.com/product/detail/?product_id=26532368dd88b47031c",
     kind: "self"
@@ -167,25 +167,25 @@ const items = [
   {
     title: "【美女/風呂上り】美脚＆美尻 盗撮 001",
     img: "https://img.pcolle.com/1822168bda36ea913d/26532468dd8a5df2ecf/050901_sanpuru001.mp4_000007300.png",
-    tag: "盗撮",
+    tags: ["盗撮"],
     price: "無料",
     url: "https://www.pcolle.com/product/detail/?product_id=26532468dd8a5df2ecf",
     kind: "self"
   },
 
-  // アフィリエイト（外部リンク）※あとでASPリンクに差し替え
- {
-  title: "スレンダーなスポーツ娘の美脚パンチラ（1）ミニスカ制服 階段、風パンチラ",
-  img: "https://img.pcolle.com/7473602df61fd995d/25538167f7b6e08feec/211736_jk069_01ap.jpg", // 画像URLだけ
-  tag: "おすすめ",
-  price: "Pick",
-  url: "https://www.pcolle.com/product/detail/?product_id=25538167f7b6e08feec&af_id=880068d8faa069104", // ASPリンク
-  kind: "affi"
-},
-{
+  // アフィリエイト（外部リンク）
+  {
+    title: "スレンダーなスポーツ娘の美脚パンチラ（1）ミニスカ制服 階段、風パンチラ",
+    img: "https://img.pcolle.com/7473602df61fd995d/25538167f7b6e08feec/211736_jk069_01ap.jpg",
+    tags: ["おすすめ"],
+    price: "Pick",
+    url: "https://www.pcolle.com/product/detail/?product_id=25538167f7b6e08feec&af_id=880068d8faa069104",
+    kind: "affi"
+  },
+  {
     title: "制服ハイソックス娘のセクハラ自習室（2）顔と陰毛パンチラを同時撮影",
     img: "https://img.pcolle.com/7473602df61fd995d/2567466814c9882949c/223256_jk070_02ap.jpg",
-    tag: "おすすめ",
+    tags: ["おすすめ"],
     price: "Pick",
     url: "https://www.pcolle.com/product/detail/?product_id=2567466814c9882949c&af_id=880068d8faa069104",
     kind: "affi"
@@ -193,49 +193,58 @@ const items = [
   {
     title: "ピックアップ 006",
     img: "https://picsum.photos/seed/a06/800/450",
-    tag: "おすすめ",
+    tags: ["おすすめ"],
     price: "Pick",
     url: "https://your-affiliate-url/",
     kind: "affi"
   }
 ];
 
-/* ---- 2. タグフィルタ & レンダリング処理 ---- */
-const tags = ["ALL", "オリジナル", ...new Set(items.map(i => i.tag))];
+/* ---- 2. タグ配列を作成（重複排除）＋「オリジナル」追加 ---- */
+const baseTags = Array.from(
+  new Set(items.flatMap(i => i.tags ?? []).filter(Boolean))
+);
+const tags = ["ALL", "オリジナル", ...baseTags];
+
+/* ---- 3. 描画処理 ---- */
 const chips = document.getElementById("chips");
 const grid  = document.getElementById("grid");
 let active  = "ALL";
 
 /* タグボタン描画 */
 function renderChips() {
-  chips.innerHTML = tags.map(t => `
-    <div class="chip${t === active ? ' active' : ''}" onclick="setTag('${t}')">${t}</div>
-  `).join('');
+  chips.innerHTML = tags
+    .map(t => `<div class="chip${t===active?' active':''}" onclick="setTag('${t}')">${t}</div>`)
+    .join('');
 }
-
-/* タグ選択時の動作 */
 function setTag(t) {
   active = t;
   renderChips();
   renderGrid();
 }
 
-/* カード描画 */
+/* カード描画（複数タグに対応／オリジナル対応） */
 function renderGrid() {
+  const match = (it) =>
+    active === "ALL" ||
+    (active === "オリジナル" && it.kind === "self") ||
+    (it.tags && it.tags.includes(active));
+
   grid.innerHTML = items
-    .filter(i => active === "ALL" || i.tag === active)
+    .filter(match)
     .map(i => {
       const isAffi  = i.kind === "affi";
       const btnText = isAffi ? "作品を見る" : "購入ページへ";
       const relAttr = isAffi ? 'rel="sponsored nofollow noopener"' : 'rel="noopener"';
       const tgtAttr = isAffi ? 'target="_blank"' : '';
+      const meta    = (i.tags || []).join("・");
       return `
         <div class="card">
           <div class="thumb" style="background-image:url('${i.img}')">
             <div class="title-overlay">${i.title}</div>
           </div>
           <div class="body">
-            <div class="meta">${i.tag}</div>
+            <div class="meta">${meta}</div>
             <div class="price">${i.price}</div>
             <a class="btn" href="${i.url}" ${relAttr} ${tgtAttr}>${btnText}</a>
           </div>
