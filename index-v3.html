@@ -78,6 +78,14 @@ header{
 .body{padding:10px 14px;}
 .meta{font-size:13px;color:var(--muted);}
 .price{color:var(--accent2);font-weight:bold;margin-top:5px;}
+  .btn{
+  display:inline-block;background:var(--accent);color:#fff;
+  padding:10px 12px;border-radius:10px;text-align:center;
+  text-decoration:none;font-weight:bold;margin-top:8px;
+  cursor:pointer;
+}
+.btn:hover{ background:var(--accent2); }
+
 footer{
   background:#151515;color:#888;text-align:center;
   padding:16px;font-size:12px;border-top:1px solid #222;
@@ -114,13 +122,23 @@ footer{
 
 <script>
 const items=[
-  {title:"制服コス×ハンド 001",img:"https://picsum.photos/seed/a01/800/450",tag:"制服",price:"¥980"},
-  {title:"非常階段フェチ 002",img:"https://picsum.photos/seed/a02/800/450",tag:"フェチ",price:"¥780"},
-  {title:"室内濃厚 003",img:"https://picsum.photos/seed/a03/800/450",tag:"室内",price:"¥1,280"},
-  {title:"ピックアップ 004",img:"https://picsum.photos/seed/a04/800/450",tag:"おすすめ",price:"Pick"},
-  {title:"制服コス 005",img:"https://picsum.photos/seed/a05/800/450",tag:"制服",price:"¥980"},
-  {title:"屋外フェチ 006",img:"https://picsum.photos/seed/a06/800/450",tag:"フェチ",price:"¥780"}
+  // 自作（内部ページへ誘導）→ とりあえず sale.html に
+  {title:"制服コス×ハンド 001", img:"https://picsum.photos/seed/a01/800/450", tag:"制服",   price:"¥980",
+   url:"./sale.html", kind:"self"},
+  {title:"非常階段フェチ 002",     img:"https://picsum.photos/seed/a02/800/450", tag:"フェチ", price:"¥780",
+   url:"./sale.html", kind:"self"},
+  {title:"室内濃厚 003",           img:"https://picsum.photos/seed/a03/800/450", tag:"室内",   price:"¥1,280",
+   url:"./sale.html", kind:"self"},
+
+  // おすすめ（アフィリエイト先へ）→ あとであなたのASPリンクに差し替え
+  {title:"ピックアップ 004",       img:"https://picsum.photos/seed/a04/800/450", tag:"おすすめ", price:"Pick",
+   url:"https://your-affiliate-url/", kind:"affi"},
+  {title:"ピックアップ 005",       img:"https://picsum.photos/seed/a05/800/450", tag:"おすすめ", price:"Pick",
+   url:"https://your-affiliate-url/", kind:"affi"},
+  {title:"ピックアップ 006",       img:"https://picsum.photos/seed/a06/800/450", tag:"おすすめ", price:"Pick",
+   url:"https://your-affiliate-url/", kind:"affi"}
 ];
+
 
 const tags=["ALL",...new Set(items.map(i=>i.tag))];
 const chips=document.getElementById("chips");
@@ -132,17 +150,27 @@ function renderChips(){
 }
 function setTag(t){active=t;renderChips();renderGrid();}
 function renderGrid(){
-  grid.innerHTML=items.filter(i=>active==="ALL"||i.tag===active)
-    .map(i=>`
-    <div class="card">
-      <div class="thumb" style="background-image:url('${i.img}')">
-        <div class="title-overlay">${i.title}</div>
-      </div>
-      <div class="body">
-        <div class="meta">${i.tag}</div>
-        <div class="price">${i.price}</div>
-      </div>
-    </div>`).join('');
+  grid.innerHTML = items
+    .filter(i => active==="ALL" || i.tag===active)
+    .map(i => {
+      const isAffi  = i.kind === "affi";
+      const btnText = isAffi ? "作品を見る" : "購入ページへ";
+      const relAttr = isAffi ? 'rel="sponsored nofollow noopener"' : 'rel="noopener"';
+      const tgtAttr = isAffi ? 'target="_blank"' : '';
+      return `
+      <div class="card">
+        <div class="thumb" style="background-image:url('${i.img}')">
+          <div class="title-overlay">${i.title}</div>
+        </div>
+        <div class="body">
+          <div class="meta">${i.tag}</div>
+          <div class="price">${i.price}</div>
+          <a class="btn" href="${i.url}" ${relAttr} ${tgtAttr}>${btnText}</a>
+        </div>
+      </div>`;
+    }).join('');
+}
+
 }
 renderChips();
 renderGrid();
