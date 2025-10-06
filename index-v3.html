@@ -121,59 +121,68 @@ footer{
 <footer>© 2025 My Adult Site</footer>
 
 <script>
-const items=[
-  // 自作（内部ページへ誘導）→ とりあえず sale.html に
-  {title:"制服コス×ハンド 001", img:"https://picsum.photos/seed/a01/800/450", tag:"制服",   price:"¥980",
-   url:"./sale.html", kind:"self"},
-  {title:"非常階段フェチ 002",     img:"https://picsum.photos/seed/a02/800/450", tag:"フェチ", price:"¥780",
-   url:"./sale.html", kind:"self"},
-  {title:"室内濃厚 003",           img:"https://picsum.photos/seed/a03/800/450", tag:"室内",   price:"¥1,280",
-   url:"./sale.html", kind:"self"},
+/* ---- 1. 商品データ定義 ---- */
+const items = [
+  // 自作（内部リンク → sale.html）
+  {title:"制服コス×ハンド 001", img:"https://picsum.photos/seed/a01/800/450", tag:"制服", price:"¥980", url:"./sale.html", kind:"self"},
+  {title:"非常階段フェチ 002", img:"https://picsum.photos/seed/a02/800/450", tag:"フェチ", price:"¥780", url:"./sale.html", kind:"self"},
+  {title:"室内濃厚 003", img:"https://picsum.photos/seed/a03/800/450", tag:"室内", price:"¥1,280", url:"./sale.html", kind:"self"},
 
-  // おすすめ（アフィリエイト先へ）→ あとであなたのASPリンクに差し替え
-  {title:"ピックアップ 004",       img:"https://picsum.photos/seed/a04/800/450", tag:"おすすめ", price:"Pick",
-   url:"https://your-affiliate-url/", kind:"affi"},
-  {title:"ピックアップ 005",       img:"https://picsum.photos/seed/a05/800/450", tag:"おすすめ", price:"Pick",
-   url:"https://your-affiliate-url/", kind:"affi"},
-  {title:"ピックアップ 006",       img:"https://picsum.photos/seed/a06/800/450", tag:"おすすめ", price:"Pick",
-   url:"https://your-affiliate-url/", kind:"affi"}
+  // アフィリエイト（外部リンク）
+  {title:"ピックアップ 004", img:"https://picsum.photos/seed/a04/800/450", tag:"おすすめ", price:"Pick", url:"https://your-affiliate-url/", kind:"affi"},
+  {title:"ピックアップ 005", img:"https://picsum.photos/seed/a05/800/450", tag:"おすすめ", price:"Pick", url:"https://your-affiliate-url/", kind:"affi"},
+  {title:"ピックアップ 006", img:"https://picsum.photos/seed/a06/800/450", tag:"おすすめ", price:"Pick", url:"https://your-affiliate-url/", kind:"affi"}
 ];
 
+/* ---- 2. タグフィルタ & レンダリング処理 ---- */
+const tags = ["ALL", ...new Set(items.map(i => i.tag))];
+const chips = document.getElementById("chips");
+const grid  = document.getElementById("grid");
+let active  = "ALL";
 
-const tags=["ALL",...new Set(items.map(i=>i.tag))];
-const chips=document.getElementById("chips");
-const grid=document.getElementById("grid");
-let active="ALL";
-
-function renderChips(){
-  chips.innerHTML=tags.map(t=>`<div class="chip${t===active?' active':''}" onclick="setTag('${t}')">${t}</div>`).join('');
+/* タグボタン描画 */
+function renderChips() {
+  chips.innerHTML = tags.map(t => `
+    <div class="chip${t === active ? ' active' : ''}" onclick="setTag('${t}')">${t}</div>
+  `).join('');
 }
-function setTag(t){active=t;renderChips();renderGrid();}
-function renderGrid(){
+
+/* タグ選択時の動作 */
+function setTag(t) {
+  active = t;
+  renderChips();
+  renderGrid();
+}
+
+/* カード描画 */
+function renderGrid() {
   grid.innerHTML = items
-    .filter(i => active==="ALL" || i.tag===active)
+    .filter(i => active === "ALL" || i.tag === active)
     .map(i => {
       const isAffi  = i.kind === "affi";
       const btnText = isAffi ? "作品を見る" : "購入ページへ";
       const relAttr = isAffi ? 'rel="sponsored nofollow noopener"' : 'rel="noopener"';
       const tgtAttr = isAffi ? 'target="_blank"' : '';
       return `
-      <div class="card">
-        <div class="thumb" style="background-image:url('${i.img}')">
-          <div class="title-overlay">${i.title}</div>
+        <div class="card">
+          <div class="thumb" style="background-image:url('${i.img}')">
+            <div class="title-overlay">${i.title}</div>
+          </div>
+          <div class="body">
+            <div class="meta">${i.tag}</div>
+            <div class="price">${i.price}</div>
+            <a class="btn" href="${i.url}" ${relAttr} ${tgtAttr}>${btnText}</a>
+          </div>
         </div>
-        <div class="body">
-          <div class="meta">${i.tag}</div>
-          <div class="price">${i.price}</div>
-          <a class="btn" href="${i.url}" ${relAttr} ${tgtAttr}>${btnText}</a>
-        </div>
-      </div>`;
+      `;
     }).join('');
 }
 
+/* 初期描画 */
 renderChips();
 renderGrid();
 </script>
+
 
 </body>
 </html>
