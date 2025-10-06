@@ -201,7 +201,7 @@ const items = [
 ];
 
 /* ---- 2. タグフィルタ & レンダリング処理 ---- */
-const tags = ["ALL", ...new Set(items.map(i => i.tag))];
+const tags = ["ALL", "オリジナル", ...new Set(items.map(i => i.tag))];
 const chips = document.getElementById("chips");
 const grid  = document.getElementById("grid");
 let active  = "ALL";
