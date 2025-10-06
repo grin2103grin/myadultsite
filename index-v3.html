@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>My Adult Site</title>
+<style>
+:root{
+  --bg:#0f0f0f;--panel:#191919;--ink:#eee;
+  --muted:#aaa;--accent:#ff4081;--accent2:#ff77a9;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);}
+
+header{
+  position:fixed;top:0;left:0;right:0;
+  background:rgba(15,15,15,0.9);backdrop-filter:blur(6px);
+  z-index:1000;border-bottom:1px solid #222;
+}
+.navbar{
+  max-width:1100px;margin:auto;display:flex;
+  align-items:center;justify-content:space-between;
+  padding:12px 16px;
+}
+.logo{font-size:22px;color:var(--accent);font-weight:bold;}
+.navbar a{color:var(--muted);text-decoration:none;margin:0 8px;}
+.navbar a:hover{color:var(--accent2);}
+
+.hero{
+  margin-top:64px;
+  width:100%;height:420px;
+  background:url('https://picsum.photos/seed/uniformhero/1200/600') center/cover no-repeat;
+  position:relative;display:flex;align-items:center;justify-content:center;
+}
+.hero::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.2),rgba(0,0,0,.7));
+}
+.hero-text{
+  position:relative;text-align:center;color:#fff;z-index:2;
+}
+.hero-text h1{font-size:34px;margin-bottom:10px;}
+.hero-text p{color:#ccc;font-size:16px;}
+
+.chips{
+  max-width:1100px;margin:20px auto;padding:0 16px;
+  display:flex;flex-wrap:wrap;gap:10px;justify-content:center;
+}
+.chip{
+  padding:8px 16px;border-radius:999px;border:1px solid #333;
+  background:#1b1b1b;color:var(--muted);cursor:pointer;
+  transition:all .2s;
+}
+.chip.active,.chip:hover{background:var(--accent);color:#fff;border-color:transparent;}
+
+.grid{
+  display:grid;gap:20px;
+  grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+  max-width:1100px;margin:0 auto 50px;padding:0 16px;
+}
+.card{
+  background:var(--panel);border-radius:10px;overflow:hidden;
+  position:relative;cursor:pointer;transition:transform .15s;
+}
+.card:hover{transform:translateY(-3px);}
+.thumb{
+  aspect-ratio:16/9;background:#000 center/cover no-repeat;
+  position:relative;overflow:hidden;
+}
+.thumb::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.6));
+}
+.title-overlay{
+  position:absolute;bottom:10px;left:10px;right:10px;
+  color:#fff;font-size:15px;font-weight:bold;z-index:2;
+}
+.body{padding:10px 14px;}
+.meta{font-size:13px;color:var(--muted);}
+.price{color:var(--accent2);font-weight:bold;margin-top:5px;}
+footer{
+  background:#151515;color:#888;text-align:center;
+  padding:16px;font-size:12px;border-top:1px solid #222;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="navbar">
+    <div class="logo">My Adult Site</div>
+    <nav>
+      <a href="./">Home</a>
+      <a href="./sale.html">My Works</a>
+      <a href="https://your-affiliate-url/" target="_blank" rel="nofollow">Picks</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-text">
+    <h1>My Adult Site</h1>
+    <p>人気の制服コスから最新フェチ作品まで</p>
+  </div>
+</section>
+
+<div class="chips" id="chips"></div>
+
+<main>
+  <div class="grid" id="grid"></div>
+</main>
+
+<footer>© 2025 My Adult Site</footer>
+
+<script>
+const items=[
+  {title:"制服コス×ハンド 001",img:"https://picsum.photos/seed/a01/800/450",tag:"制服",price:"¥980"},
+  {title:"非常階段フェチ 002",img:"https://picsum.photos/seed/a02/800/450",tag:"フェチ",price:"¥780"},
+  {title:"室内濃厚 003",img:"https://picsum.photos/seed/a03/800/450",tag:"室内",price:"¥1,280"},
+  {title:"ピックアップ 004",img:"https://picsum.photos/seed/a04/800/450",tag:"おすすめ",price:"Pick"},
+  {title:"制服コス 005",img:"https://picsum.photos/seed/a05/800/450",tag:"制服",price:"¥980"},
+  {title:"屋外フェチ 006",img:"https://picsum.photos/seed/a06/800/450",tag:"フェチ",price:"¥780"}
+];
+
+const tags=["ALL",...new Set(items.map(i=>i.tag))];
+const chips=document.getElementById("chips");
+const grid=document.getElementById("grid");
+let active="ALL";
+
+function renderChips(){
+  chips.innerHTML=tags.map(t=>`<div class="chip${t===active?' active':''}" onclick="setTag('${t}')">${t}</div>`).join('');
+}
+function setTag(t){active=t;renderChips();renderGrid();}
+function renderGrid(){
+  grid.innerHTML=items.filter(i=>active==="ALL"||i.tag===active)
+    .map(i=>`
+    <div class="card">
+      <div class="thumb" style="background-image:url('${i.img}')">
+        <div class="title-overlay">${i.title}</div>
+      </div>
+      <div class="body">
+        <div class="meta">${i.tag}</div>
+        <div class="price">${i.price}</div>
+      </div>
+    </div>`).join('');
+}
+renderChips();
+renderGrid();
+</script>
+
+</body>
+</html>
